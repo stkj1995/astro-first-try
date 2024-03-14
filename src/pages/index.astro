@@ -2,10 +2,28 @@
 import "../styles/style.css";
 import MainLayout from "../layouts/MainLayout.astro";
 import Button from "../components/Button.astro";
+
+//nedenfor skal indkommenteres og ufyldes med korrekt data fra supabase
+
+const data = await fetch("herskalstaaenurl", {
+	method:"GET",
+	headers: {
+		apikey:"herskalvaereapinoegle"
+	}
+	 }).then(res=>res.json());
+
+
 ---
 
 <MainLayout title="Hjem">
 	<Button variant="primary" size="small">TEXT</Button>
 	<Button variant="secondary" size="medium">TEXT</Button>
 	<Button variant="secondary" size="large">TEXT</Button>
+	<section class="shows">
+		{data.map(show=>{
+			return <TVShow data={show} />
+		})}
+		<TVShow />
+	</section>
 </MainLayout>
+
